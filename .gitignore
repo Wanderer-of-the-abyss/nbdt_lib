@@ -1,0 +1,34 @@
+# Python-related
+*.pyc
+__pycache__/
+
+# Distribution/build files
+dist/
+build/
+*.egg-info/
+
+# IDE-specific
+.idea/
+.vscode/
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+
+# Environment-related
+.env
+
+# System-specific
+.DS_Store
+Thumbs.db
+
+# Ignore user-specific configuration files
+*.bak
+*.swp
+*~
+
+# Ignore files generated during testing
+.coverage
+htmlcov/
+nosetests.xml
