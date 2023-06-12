@@ -13,7 +13,7 @@ def load_dataset(dataset_name, destination_path=None):
         dataset_url = dataset_mapping[dataset_name]
         
         if destination_path is None:
-            # If destination_path is not specified, it will store the dataset in a variable
+            # If destination_path is not specified, it will store the dataset in a variable specified by the user
             response = urllib.request.urlopen(dataset_url)
             dataset_content = response.read().decode('utf-8')
             print('Dataset downloaded successfully.') # print confirmation
