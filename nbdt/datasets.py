@@ -5,7 +5,8 @@ def load_dataset(dataset_name, destination_path=None):
     dataset_mapping = {
         'arxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/arxiv2.csv',
         'bioarxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/bioarxiv%20(1).csv',
-        'plos-one': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/PLOS_ONE2.csv'
+        'plos-one': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/PLOS_ONE2.csv',
+        'medline': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/MEDLINE_Journal_Recomm.csv'
         # Add more dataset mappings as needed
     }
 
