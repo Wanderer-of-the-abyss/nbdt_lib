@@ -18,12 +18,12 @@ class TestNbdt(unittest.TestCase):
         self.assertTrue(os.path.exists(self.destination_path))
     
     def test_data_loader_invalid_dataset(self):
-        invalid_dataset = 'invalid'
+        invalid_dataset = 'arxiv2'
         with self.assertRaises(ValueError):
             load_dataset(invalid_dataset, self.destination_path)
     
     def test_data_loader_invalid_destination(self):
-        invalid_destination = 'na_file.csv'
+        invalid_destination = 'na_file.doc'
         with self.assertRaises(FileNotFoundError):
             load_dataset(self.dataset_name, invalid_destination)
 
