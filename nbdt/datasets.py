@@ -16,7 +16,7 @@ def load_dataset(dataset_name, start_year=None, end_year=None, destination_path=
 
         response = urllib.request.urlopen(dataset_url)
         dataset_content = response.read().decode('utf-8')
-        dataset_dataframe = pd.read_csv(pd.compat.StringIO(dataset_content))
+        dataset_dataframe = pd.read_csv(io.StringIO(dataset_content))
         
         if dataset_name == 'arxiv' and start_year and end_year:
             dataset_dataframe = dataset_dataframe[
