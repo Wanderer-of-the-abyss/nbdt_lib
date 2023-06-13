@@ -1,4 +1,5 @@
 import urllib.request
+import pandas as pd
 
 def load_dataset(dataset_name, destination_path=None):
     # Mapping of dataset names to dataset URLs
@@ -14,14 +15,16 @@ def load_dataset(dataset_name, destination_path=None):
         dataset_url = dataset_mapping[dataset_name]
         
         if destination_path is None:
-            # If destination_path is not specified, it will store the dataset in a variable specified by the user
+            # If destination_path is not specified, return the dataset content as a DataFrame
             response = urllib.request.urlopen(dataset_url)
             dataset_content = response.read().decode('utf-8')
-            print('Dataset downloaded successfully.') # print confirmation
-            return dataset_content
+            dataset_dataframe = pd.read_csv(pd.compat.StringIO(dataset_content))
+            print('Dataset downloaded successfully.')  # print confirmation
+            return dataset_dataframe
         else:
             urllib.request.urlretrieve(dataset_url, destination_path)
             print('Dataset downloaded successfully.')
     else:
         print(f'Dataset "{dataset_name}" is not available.')
+
 
