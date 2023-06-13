@@ -1,7 +1,8 @@
 import urllib.request
 import pandas as pd
+import io
 
-def load_dataset(dataset_name, destination_path=None):
+def load_dataset2(dataset_name, destination_path=None):
     # Mapping of dataset names to dataset URLs
     dataset_mapping = {
         'arxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/arxiv2.csv',
@@ -15,11 +16,11 @@ def load_dataset(dataset_name, destination_path=None):
         dataset_url = dataset_mapping[dataset_name]
         
         if destination_path is None:
-            # If destination_path is not specified, return the dataset content as a DataFrame
+            # If destination_path is not specified, it will store the dataset in a pandas DataFrame
             response = urllib.request.urlopen(dataset_url)
             dataset_content = response.read().decode('utf-8')
-            dataset_dataframe = pd.read_csv(pd.compat.StringIO(dataset_content))
-            print('Dataset downloaded successfully.')  # print confirmation
+            dataset_dataframe = pd.read_csv(io.StringIO(dataset_content))
+            print('Dataset downloaded successfully.') # print confirmation
             return dataset_dataframe
         else:
             urllib.request.urlretrieve(dataset_url, destination_path)
