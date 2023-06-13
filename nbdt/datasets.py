@@ -1,5 +1,6 @@
 import pandas as pd
 import urllib.request
+import io
 
 def load_dataset(dataset_name, start_year=None, end_year=None, destination_path=None):
     # Mapping of dataset names to dataset URLs
