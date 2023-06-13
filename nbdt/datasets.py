@@ -2,7 +2,7 @@ import urllib.request
 import pandas as pd
 import io
 
-def load_dataset2(dataset_name, destination_path=None):
+def load_dataset(dataset_name, destination_path=None):
     # Mapping of dataset names to dataset URLs
     dataset_mapping = {
         'arxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/arxiv2.csv',
