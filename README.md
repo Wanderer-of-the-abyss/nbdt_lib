@@ -16,9 +16,9 @@ Currently the library has 4 datasets ready to use:
 
 `arxiv`: Has nearly 4k papers
 
-`bioarxiv`: Has 29k papers
+`bioarxiv`: Has 29k papers from Bioarxiv
 
-`plos_one`: Has 17k papers
+`plos_one`: Has 17k papers from PLOS_ONE
 
 `medline`: Has 100k papers from the top 200 journals in the neuroscience field
 
