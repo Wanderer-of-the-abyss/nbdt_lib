@@ -19,13 +19,15 @@ class TestNbdt(unittest.TestCase):
     
     def test_data_loader_invalid_dataset(self):
         invalid_dataset = 'arxiv2'
-        with self.assertRaises(ValueError):
+        with self.assertRaises(SystemExit) as cm:
             load_dataset(invalid_dataset, self.destination_path)
+        self.assertEqual(cm.exception.code, f'Dataset "{invalid_dataset}" is not available.')
     
     def test_data_loader_invalid_destination(self):
         invalid_destination = 'na_file.doc'
-        with self.assertRaises(FileNotFoundError):
+        with self.assertRaises(SystemExit) as cm:
             load_dataset(self.dataset_name, invalid_destination)
+        self.assertNotEqual(cm.exception.code, 'Dataset downloaded successfully.')
 
 if __name__ == '__main__':
     unittest.main()
