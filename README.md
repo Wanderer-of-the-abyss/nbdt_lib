@@ -29,5 +29,12 @@ from nbdt.datasets import load_dataset
 load_dataset(dataset_name, destination_path)  # load_dataset('arxiv', 'arxiv.csv')
 
 ```
+You can also load it as pandas Dataframe by assigning it a variable
 
+```python
+import pandas as pd
+data = load_dataset(dataset_name)  # arxiv = load_dataset('arxiv')
+data.head()
+
+```
 
