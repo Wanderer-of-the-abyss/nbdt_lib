@@ -22,7 +22,7 @@ Currently the library has 4 datasets ready to use:
 
 `medline`: Has 100k papers from the top 200 journals in the neuroscience field
 
-To load the load your dataset use the following code:
+To load your dataset use the following code:
 
 ```python
 from nbdt.datasets import load_dataset
