@@ -7,7 +7,7 @@ def load_dataset(dataset_name, start_year=None, end_year=None, destination_path=
     dataset_mapping = {
         'arxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/arxiv2.csv',
         'bioarxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/bioarxiv%20(1).csv',
-        'plos-one': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/PLOS_ONE2.csv',
+        'plos-one': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/plos_one_new.csv',
         'medline': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/MEDLINE_Journal_Recomm.csv'
         # Add more dataset mappings as needed
     }
