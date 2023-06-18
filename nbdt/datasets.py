@@ -9,7 +9,8 @@ def load_dataset(dataset_name, start_year=None, end_year=None, destination_path=
         'arxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/arxiv2.csv',
         'bioarxiv': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/bioarxiv%20(1).csv',
         'plos_one': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/plos_one_new.csv',
-        'medline': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/MEDLINE_Journal_Recommend2.csv'
+        'medline_small': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/MEDLINE_Journal_Recommend2.csv'
+        'medline_large': 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/MEDLINE_COMPLETE.csv' 
         # Add more dataset mappings as needed
     }
 
@@ -69,7 +70,7 @@ def filter(start_year, end_year, dataset_name, dataset_dataframe):
                               ((pd.to_datetime(dataset_dataframe['Publication Date'], format="%Y-%m-%dT%H:%M:%SZ")).dt.year >= start_year) &
                               ((pd.to_datetime(dataset_dataframe['Publication Date'], format="%Y-%m-%dT%H:%M:%SZ")).dt.year <= end_year)
                                   ]
-             elif dataset_name == 'medline' and start_year and end_year:
+             elif (dataset_name == ('medline_large' | 'medline_small')) and start_year and end_year:
                         dataset_dataframe['Year'] = dataset_dataframe['P_Date'].str.split(' ', expand=True)[0]
                         dataset_dataframe['Month'] = dataset_dataframe['P_Date'].str.split(' ', expand=True)[1]
        
