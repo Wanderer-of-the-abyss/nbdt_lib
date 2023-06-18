@@ -70,7 +70,8 @@ def filter(start_year, end_year, dataset_name, dataset_dataframe):
                               ((pd.to_datetime(dataset_dataframe['Publication Date'], format="%Y-%m-%dT%H:%M:%SZ")).dt.year >= start_year) &
                               ((pd.to_datetime(dataset_dataframe['Publication Date'], format="%Y-%m-%dT%H:%M:%SZ")).dt.year <= end_year)
                                   ]
-             elif (dataset_name == ('medline_large' | 'medline_small')) and start_year and end_year:
+             elif (dataset_name in ['medline_large', 'medline_small']) and start_year and end_year:
+
                         dataset_dataframe['Year'] = dataset_dataframe['P_Date'].str.split(' ', expand=True)[0]
                         dataset_dataframe['Month'] = dataset_dataframe['P_Date'].str.split(' ', expand=True)[1]
        
