@@ -6,7 +6,7 @@ import pandas as pd
 import csv
 import urllib.request
 import io
-import arxiv
+
 
 
 
@@ -236,50 +236,76 @@ def plos_one(c_date, destination_path, update, b2='2023-05-31'):
         print("The data is stored as: ", destination_path)
 
 
-def arxiv():
-     # Perform the arXiv search with date filtering
-    search = arxiv.Search (
-       query='neuroscience',
-       max_results=20000,
-       sort_by=arxiv.SortCriterion.SubmittedDate,
-       sort_order=arxiv.SortOrder.Descending,
+import arxiv
 
-               )
+
+def arxiv(c_date, destination_path, update, c_date2='2023-05-31'):
+    import arxiv
+
+    # Perform the arXiv search with date filtering
+    search = arxiv.Search(
+        query='brain',
+        max_results=20000,
+        sort_by=arxiv.SortCriterion.SubmittedDate,
+        sort_order=arxiv.SortOrder.Descending,
+    )
+
     # Create an empty list to store the extracted data
     data = []
-
-# Iterate over the search results
+    print("Collecting Papers........ Est Time: 10 mins")
+    # Iterate over the search results
     for result in search.results():
-    # Extract the desired information from each result
-       entry_id = result.entry_id
-       submitter = ""
-       if result.authors:
-          submitter = result.authors[0].name
-          authors = [author.name for author in result.authors]
-          title = result.title
-          journal_ref = result.journal_ref if result.journal_ref else ""
+        # Extract the desired information from each result
+        entry_id = result.entry_id
+        submitter = ""
+        if result.authors:
+            submitter = result.authors[0].name
+        authors = [author.name for author in result.authors]
+        title = result.title
+        journal_ref = result.journal_ref if result.journal_ref else ""
+        categories = [result.primary_category]
+        abstract = result.summary
+        versions = len(result.comment) if result.comment else 0
+        update_date = result.updated
+        authors_parsed = []
 
+        # Append the extracted data to the list
+        data.append({
+            'id': entry_id,
+            'submitter': submitter,
+            'authors': authors,
+            'title': title,
+            'categories': categories,
+            'abstract': abstract,
+            'versions': versions,
+            'update_date': update_date
+        })
 
-          categories = [result.primary_category]
-
-          abstract = result.summary
-          versions = len(result.comment) if result.comment else 0
-          update_date = result.updated
-          authors_parsed = []
-
-    # Append the extracted data to the list
-    data.append({
-        'id': entry_id,
-        'submitter': submitter,
-        'authors': authors,
-        'title': title,
-        'journal-ref': journal_ref,
-        'categories': categories,
-        'abstract': abstract,
-        'versions': versions,
-        'update_date': update_date,
-        'authors_parsed': authors_parsed
-    })
-
-# Create a DataFrame from the extracted data
+    # Create a DataFrame from the extracted data
     df = pd.DataFrame(data)
+    df['update_date'] = pd.to_datetime(df['update_date'])
+
+    # Define the start and end dates for filtering
+
+
+    # Filter the DataFrame based on the date range
+    filtered_df = df[(df['update_date'] >= c_date2) & (df['update_date'] <= c_date)]
+    arxiv_2 = filtered_df.drop_duplicates(subset=['abstract'], keep='last')
+    arxiv_final = arxiv_2.dropna()
+    if not update:
+       arxiv_final.to_csv(destination_path, index=False)
+    
+
+    if update:
+      arxiv_url = 'https://huggingface.co/datasets/PenguinMan/ARXIV/resolve/main/arxiv2.csv'
+      print("Updating Source Dataset...............")
+      response3 = urllib.request.urlopen(arxiv_url)
+      dataset_content3 = response3.read().decode('utf-8')
+      dataset_dataframe3 = pd.read_csv(io.StringIO(dataset_content3))
+      arxiv_new = dataset_dataframe3[['id', 'submitter', 'authors', 'title', 'categories', 'abstract', 'versions', 'update_date']]
+      arxiv_new2 = arxiv_new.drop_duplicates(subset=['abstract'], keep='last')
+      arxiv_new3 = arxiv_new2.dropna()                             
+            
+
+      arxiv_new3.to_csv(destination_path, index=False)
+      print("The source dataset is updated and is stored at:", destination_path)
