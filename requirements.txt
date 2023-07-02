@@ -1,2 +1,5 @@
+arxiv
+dateutil
+requests
 pandas
-wget
+
