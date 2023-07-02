@@ -10,8 +10,6 @@ setup(
     install_requires=[
         'arxiv',
         'pandas',
-        'dateutil',
-        'requests',
     ],
 )
 
