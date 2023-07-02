@@ -1,2 +1,2 @@
 from .datasets import load_dataset
-from .datasets import update_dataset
+from .update import update_dataset
