@@ -5,11 +5,13 @@ setup(
     version='0.1',
     author='Subhankar Panda',
     author_email='subhankarpanda556@example.com',
-    description='nbdt library for reccomending authors, papers, and journals',
+    description='nbdt library for recommending authors, papers, and journals,
     packages=find_packages(),
     install_requires=[
-        'wget',
+        'arxiv',
         'pandas',
+        'dateutil',
+        'requests',
        
     ],
 )
